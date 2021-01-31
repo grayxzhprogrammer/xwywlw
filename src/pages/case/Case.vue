@@ -38,7 +38,7 @@ export default {
   mounted() {
     window.console.log("case");
     this.$http
-      .get("Cases/GetCasesAll")
+      .get("portal/casesList")
       .then(response => {
         //console.log(response);
         this.caseList = response.data;

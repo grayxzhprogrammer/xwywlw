@@ -111,6 +111,10 @@
       return {
         loading: false,
         partnerImg: [],
+        totalPage:0,
+        pageNum:1,
+        pageSize:2,
+        courseListData:[],
         courseList: [],
         teamItem:[],
         swiperOption: {
@@ -125,22 +129,28 @@
       };
     },
     mounted() {
-      var courseListData= [{"id":1,"year":"2019年12月","content":"星望月物联网科技有限公司成立"},
-        {"id":2,"year":"2020年10月","content":"星望月物联网科技有限公司全资收购蜗居(杭州)信息科技有限公司"},
-        {"id":3,"year":"2020年12月","content":"星望月物联网科技有限公司在江西赣州设立服务中心"}];
-      var groupCount = Math.ceil(courseListData.length / 2);
-      window.console.log(groupCount);
-      window.console.log(groupCount);
-      for (let i = 0; i < groupCount; i++) {
-        let img2 = [];
-        for (let j = 0; j < 2; j++) {
-          if (courseListData.length - 1 >= i * 2 + j) {
-            img2.push(courseListData[i * 2 + j]);
-          }
-        }
-        this.courseList.push(img2);
-      }
-      window.console.log(this.courseList);
+      this.$http.get("portal/listCourseAll").then(
+              response => {
+                this.courseListData = response.data.data;
+                if(this.courseListData.length>0){
+                  var groupCount = Math.ceil(this.courseListData.length / 2);
+                  for (let i = 0; i < groupCount; i++) {
+                    let img2 = [];
+                    for (let j = 0; j < 2; j++) {
+                      if (this.courseListData.length - 1 >= i * 2 + j) {
+                        img2.push(this.courseListData[i * 2 + j]);
+                      }
+                    }
+                    this.courseList.push(img2);
+                  }
+                }
+                window.console.log(this.courseList);
+              }).catch(e => {
+        this.$message({
+          message: "网络或程序异常！" + e,
+          type: "error"
+        });
+      });
     }
   };
 </script>

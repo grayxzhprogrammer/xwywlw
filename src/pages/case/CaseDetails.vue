@@ -34,7 +34,7 @@ export default {
   methods: {
     loadData() {
       this.$http
-        .get(`Cases/GetCasesById/${this.pid}`)
+        .get(`portal/getCasesById/${this.pid}`)
         .then(response => {
           //console.log(response);
           this.caseIdList = response.data;
