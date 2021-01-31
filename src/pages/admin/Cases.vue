@@ -203,12 +203,6 @@ export default {
             message: "已取消删除"
           });
         });
-    },
-    //时间格式化
-    dateFormat: function(row) {
-      //row 表示一行数据, createTime 表示要格式化的字段名称
-      let t = new Date(row.createTime);
-      return t.getFullYear() + "-" + (t.getMonth() + 1) + "-" + t.getDate();
     }
   }
 };

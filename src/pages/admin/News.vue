@@ -82,7 +82,6 @@ export default {
         img: "",
         type: 1,
         content: "",
-        createTime: new Date()
       },
       dialogFormVisible: false,
       formLabelWidth: "120px",
