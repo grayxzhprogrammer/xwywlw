@@ -96,11 +96,11 @@ export default {
     },
     openDialog() {
       // 清除数据
-      this.formData.Id = 0;
+      this.formData.id = 0;
       this.formData.LoginName = "";
       this.formData.Password = "";
       this.formData.IsAction = true;
-      this.formData.CreateTime = new Date();
+      this.formData.createTime = new Date();
 
       this.dialogFormVisible = true;
     },
@@ -108,7 +108,7 @@ export default {
     handleCreateOrModify() {
       window.console.log(this.formData);
       //window.console.log(JSON.stringify(this.formData));
-      if (!this.formData.Id) {
+      if (!this.formData.id) {
         // ID 无效时 视为新增
         this.loading = true;
         this.$http
@@ -168,7 +168,7 @@ export default {
           // 调接口删除
           this.loading = true;
           this.$http
-            .post(`User/DeleteUser?id=${row.Id}`, null, this.options)
+            .post(`User/DeleteUser?id=${row.id}`, null, this.options)
             .then(response => {
               this.loading = false;
               window.console.log(response);
@@ -194,8 +194,8 @@ export default {
     },
     //时间格式化
     dateFormat: function(row) {
-      //row 表示一行数据, CreateTime 表示要格式化的字段名称
-      let t = new Date(row.CreateTime);
+      //row 表示一行数据, createTime 表示要格式化的字段名称
+      let t = new Date(row.createTime);
       return t.getFullYear() + "-" + (t.getMonth() + 1) + "-" + t.getDate();
     }
   }

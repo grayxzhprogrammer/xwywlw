@@ -3,10 +3,10 @@
     <el-button type="primary" @click="openDialog()">新增用户</el-button>
 
     <el-table border :data="tableData" v-loading="loading" style="width: 100%">
-      <el-table-column prop="Id" label="序号" width="180"></el-table-column>
-      <el-table-column prop="Key" label="键" width="180"></el-table-column>
-      <el-table-column prop="Content" label="值"></el-table-column>
-      <el-table-column label="操作">
+      <el-table-column prop="id" label="序号" width="180" align="center"></el-table-column>
+      <el-table-column prop="key" label="键" width="180" align="center"></el-table-column>
+      <el-table-column prop="content" label="值" align="center"></el-table-column>
+      <el-table-column label="操作" align="center">
         <template slot-scope="scope">
           <el-button
             type="primary"
@@ -24,10 +24,10 @@
     <el-dialog title="案例编辑" :visible.sync="dialogFormVisible">
       <el-form :model="formData">
         <el-form-item label="数据键" :label-width="formLabelWidth">
-          <el-input v-model="formData.Key" autocomplete="off"></el-input>
+          <el-input v-model="formData.key" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="数据键" :label-width="formLabelWidth">
-          <el-input v-model="formData.Content" autocomplete="off"></el-input>
+          <el-input v-model="formData.content" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -47,10 +47,10 @@ export default {
       formLabelWidth: "120px",
       tableData: [],
       formData: {
-        Id: 0,
-        Key: "",
-        Content: "",
-        CreateTime: new Date()
+        id: 0,
+        key: "",
+        content: "",
+        createTime: new Date()
       },
       options: {}
     };
@@ -85,10 +85,10 @@ export default {
     },
     openDialog() {
       // 清除数据
-      this.formData.Id = 0;
-      this.formData.Key = "";
-      this.formData.Content = "";
-      this.formData.CreateTime = new Date();
+      this.formData.id = 0;
+      this.formData.key = "";
+      this.formData.content = "";
+      this.formData.createTime = new Date();
 
       this.dialogFormVisible = true;
     },
@@ -96,7 +96,7 @@ export default {
     handleCreateOrModify() {
       window.console.log(this.formData);
       //window.console.log(JSON.stringify(this.formData));
-      if (!this.formData.Id) {
+      if (!this.formData.id) {
         // ID 无效时 视为新增
         this.loading = true;
         this.$http
@@ -165,7 +165,7 @@ export default {
           this.loading = true;
           this.$http
             .post(
-              `DataDictionary/DeleteDataDictionary?id=${row.Id}`,
+              `DataDictionary/DeleteDataDictionary?id=${row.id}`,
               null,
               this.options
             )
@@ -194,8 +194,8 @@ export default {
     },
     //时间格式化
     dateFormat: function(row) {
-      //row 表示一行数据, CreateTime 表示要格式化的字段名称
-      let t = new Date(row.CreateTime);
+      //row 表示一行数据, createTime 表示要格式化的字段名称
+      let t = new Date(row.createTime);
       return t.getFullYear() + "-" + (t.getMonth() + 1) + "-" + t.getDate();
     }
   }

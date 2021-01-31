@@ -9,7 +9,7 @@
             后续将以校园智慧洗涤为切入点，全面提校园园师生的生活水平。</p>
           <div class="content-nav-item">
             <div class="item-list" v-for="(item,index) in washingImgList" :key="index">
-              <div class="item-img" v-lazy:background-image="imgserver + item.img"></div>
+              <div class="item-img" v-lazy:background-image="item.img"></div>
               <p class="item-list-title">{{item.title}}</p>
               <p class="item-list-content">{{item.content}}</p>
             </div>
@@ -24,7 +24,7 @@
           <p class="eTitle">智慧超市是线下商超发展的新方向。智慧超市系统是智慧超市实现的基础，其是基于互联网、物联网和云计算技术等新兴技术，围绕零售行业打造的智能管理系统，可以实现智慧结算、智慧推荐、智能防盗、智慧管理等功能。</p>
           <div class="content-nav-item">
             <div class="item-list" v-for="(item,index) in marketImgList" :key="index">
-              <div class="item-img" v-lazy:background-image="imgserver + item.img"></div>
+              <div class="item-img" v-lazy:background-image="item.img"></div>
               <p class="item-list-title">{{item.title}}</p>
               <p class="item-list-content">{{item.content}}</p>
             </div>
@@ -38,7 +38,7 @@
           <p class="eTitle">在充分调查校园校园环境后，本着精益求精的精神，为了解决传统校园零售中的弊端，公司以智慧支付为基础，推出了校园智慧新零售业务。</p>
           <div class="content-nav-item">
             <div class="item-list" v-for="(item,index) in retailImgList" :key="index">
-              <div class="item-img" v-lazy:background-image="imgserver + item.img"></div>
+              <div class="item-img" v-lazy:background-image="item.img"></div>
               <p class="item-list-title">{{item.title}}</p>
               <p class="item-list-content">{{item.content}}</p>
             </div>

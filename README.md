@@ -1,11 +1,7 @@
-# Shanghai kejian engineering management
-> 科健工程管理有限公司企业官网 前端    
-
-一个业余时间（三周）的外包项目 最终成品：http://www.shkjem.com    
-主分支已更新至改进版，老版本源码移至 Release  
-
-如果是学习的话推荐学习新版本 链接 http://kejian.filog.cn/    
-另外有些同学在问后端的代码 这里 https://github.com/ifzc/KeJian.Core.Api
+# Hangzhou xingwangyue engineering management
+> 杭州星望月物联网科技有限公司企业官网 前端    
+最终成品：http://www.xwyzn.com    
+后端的文档地址:http://www.xwyzn.com:80/swagger-ui.html
 
 ## 新版本改进
 1. 整体重构，结构升级为最新 vue-cli

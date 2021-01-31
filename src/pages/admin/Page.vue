@@ -12,8 +12,8 @@
       </el-form-item>
     </el-form>
     <el-table :data="tableData" border style="width: 100%">
-      <el-table-column prop="name" label="姓名"></el-table-column>
-      <el-table-column prop="age" label="年龄"></el-table-column>
+      <el-table-column prop="name" label="姓名"  align="center"></el-table-column>
+      <el-table-column prop="age" label="年龄"  align="center"></el-table-column>
     </el-table>
     <el-pagination
       background

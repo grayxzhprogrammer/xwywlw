@@ -55,8 +55,8 @@
                     </el-divider>
                     <div class="item-bottom" :class="{'order' : one%2===1}">
                       <div class="item-bottom-content">
-                        <p>{{courseOne.Content}}</p>
-                        <p>{{courseOne.Year}}</p>
+                        <p>{{courseOne.content}}</p>
+                        <p>{{courseOne.year}}</p>
                       </div>
                     </div>
                   </div>
@@ -125,9 +125,9 @@
       };
     },
     mounted() {
-      var courseListData= [{"Id":1,"Year":"2019年12月","Content":"星望月物联网科技有限公司成立"},
-        {"Id":2,"Year":"2020年10月","Content":"星望月物联网科技有限公司全资收购蜗居(杭州)信息科技有限公司"},
-        {"Id":3,"Year":"2020年12月","Content":"星望月物联网科技有限公司在江西赣州设立服务中心"}];
+      var courseListData= [{"id":1,"year":"2019年12月","content":"星望月物联网科技有限公司成立"},
+        {"id":2,"year":"2020年10月","content":"星望月物联网科技有限公司全资收购蜗居(杭州)信息科技有限公司"},
+        {"id":3,"year":"2020年12月","content":"星望月物联网科技有限公司在江西赣州设立服务中心"}];
       var groupCount = Math.ceil(courseListData.length / 2);
       window.console.log(groupCount);
       window.console.log(groupCount);

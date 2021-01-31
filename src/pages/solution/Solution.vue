@@ -30,7 +30,7 @@
 
                     <div class="content-nav-item">
                         <div class="item-list" v-for="(item,index) in solutionList" :key="index">
-                            <div class="item-img" v-lazy:background-image="imgserver + item.img"></div>
+                            <div class="item-img" v-lazy:background-image="item.img"></div>
 
                             <p class="item-list-title">{{item.title}}</p>
                             <p class="item-list-content">{{item.content1}}</p>
@@ -49,7 +49,7 @@
                         <div class="item-list" v-for="(item,index) in manageList" :key="index">
                             <div class="item">
                                 <div class="item-left">
-                                    <div class="item-img" v-lazy:background-image="imgserver + item.img"></div>
+                                    <div class="item-img" v-lazy:background-image="item.img"></div>
                                 </div>
                                 <div class="item-right">
                                     <p class="item-list-title">{{item.title}}</p>
@@ -68,7 +68,7 @@
                     <p class="eTitle">基于大数据与多维度模型搭建，支持场景化的精准运营，为项目管理和营收增值搭建流畅、平衡的解决方案。</p>
                     <div class="content-nav-item">
                         <div class="item-list" v-for="(item,index) in supportList" :key="index">
-                            <div class="item-img" v-lazy:background-image="imgserver + item.img"></div>
+                            <div class="item-img" v-lazy:background-image="item.img"></div>
                             <p class="item-list-title">{{item.title}}</p>
                             <span class="item-list-content">{{item.content1}}</span>
                             <span class="item-list-content">{{item.content2}}</span>

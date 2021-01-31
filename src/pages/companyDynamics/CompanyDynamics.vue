@@ -5,13 +5,13 @@
       <div class="news-section-content">
         <div class="content-nav-item">
           <div class="item-list" v-for="(item,index) in newsList" :key="index">
-            <div class="item-img" v-lazy:background-image="imgserver + item.Img"></div>
-            <p class="item-list-title">{{item.Title}}</p>
-            <p class="item-list-content">{{item.Content}}</p>
+            <div class="item-img" v-lazy:background-image="item.img"></div>
+            <p class="item-list-title">{{item.title}}</p>
+            <p class="item-list-content">{{item.content}}</p>
             <div class="item-list-more">
               <router-link
                       class="text-decoration"
-                      :to="{ name: 'companyDynamicdetails', params: { id: item.Id }}"
+                      :to="{ name: 'companyDynamicdetails', params: { id: item.id }}"
               >
                 <img src="../../assets/img/sanjiao.png" />
                 <span>more</span>
@@ -47,76 +47,76 @@
         loading: true,
         newsList: [
           {
-            "Id":1,
-            "Title":"星望月物联网科技有限公司成立",
-            "Img":"/imagestore/2018/0917/98c71315-86dc-4c99-b973-c89136bd8885.jpg",
-            "Type":1,
-            "Content":"      热烈祝贺星望月物联网科技有限公司成立!",
-            "CreateTime":"2019-12-17T19:46:46.673"
+            "id":1,
+            "title":"星望月物联网科技有限公司成立",
+            "img":"/imagestore/2018/0917/98c71315-86dc-4c99-b973-c89136bd8885.jpg",
+            "type":1,
+            "content":"      热烈祝贺星望月物联网科技有限公司成立!",
+            "createTime":"2019-12-17T19:46:46.673"
           },
           {
-            "Id":2,
-            "Title":"星望月物联网科技有限公司全资收购蜗居(杭州)信息科技有限公司",
-            "Img":"/imagestore/2018/0529/d3f75b1c-cb7e-488f-95ac-8f80f5c332fe.jpg",
-            "Type":1,
-            "Content":"      热烈祝贺星望月物联网科技有限公司全资收购蜗居(杭州)信息科技有限公司。",
-            "CreateTime":"2020-10-23T16:24:11.633"
+            "id":2,
+            "title":"星望月物联网科技有限公司全资收购蜗居(杭州)信息科技有限公司",
+            "img":"/imagestore/2018/0529/d3f75b1c-cb7e-488f-95ac-8f80f5c332fe.jpg",
+            "type":1,
+            "content":"      热烈祝贺星望月物联网科技有限公司全资收购蜗居(杭州)信息科技有限公司。",
+            "createTime":"2020-10-23T16:24:11.633"
           },
           {
-            "Id":3,
-            "Title":"星望月物联网科技有限公司在江西赣州设立服务中心",
-            "Img":"/imagestore/2018/0529/d3f75b1c-cb7e-488f-95ac-8f80f5c332fe.jpg",
-            "Type":1,
-            "Content":"      热烈祝贺星望月物联网科技有限公司在江西赣州设立服务中心",
-            "CreateTime":"2020-10-23T16:24:11.633"
+            "id":3,
+            "title":"星望月物联网科技有限公司在江西赣州设立服务中心",
+            "img":"/imagestore/2018/0529/d3f75b1c-cb7e-488f-95ac-8f80f5c332fe.jpg",
+            "type":1,
+            "content":"      热烈祝贺星望月物联网科技有限公司在江西赣州设立服务中心",
+            "createTime":"2020-10-23T16:24:11.633"
           },
           {
-            "Id":4,
-            "Title":"星望月物联网科技有限公司成立",
-            "Img":"/imagestore/2018/0917/98c71315-86dc-4c99-b973-c89136bd8885.jpg",
-            "Type":1,
-            "Content":"      热烈祝贺星望月物联网科技有限公司成立!",
-            "CreateTime":"2019-12-17T19:46:46.673"
+            "id":4,
+            "title":"星望月物联网科技有限公司成立",
+            "img":"/imagestore/2018/0917/98c71315-86dc-4c99-b973-c89136bd8885.jpg",
+            "type":1,
+            "content":"      热烈祝贺星望月物联网科技有限公司成立!",
+            "createTime":"2019-12-17T19:46:46.673"
           },
           {
-            "Id":5,
-            "Title":"星望月物联网科技有限公司全资收购蜗居(杭州)信息科技有限公司",
-            "Img":"/imagestore/2018/0529/d3f75b1c-cb7e-488f-95ac-8f80f5c332fe.jpg",
-            "Type":1,
-            "Content":"      热烈祝贺星望月物联网科技有限公司全资收购蜗居(杭州)信息科技有限公司。",
-            "CreateTime":"2020-10-23T16:24:11.633"
+            "id":5,
+            "title":"星望月物联网科技有限公司全资收购蜗居(杭州)信息科技有限公司",
+            "img":"/imagestore/2018/0529/d3f75b1c-cb7e-488f-95ac-8f80f5c332fe.jpg",
+            "type":1,
+            "content":"      热烈祝贺星望月物联网科技有限公司全资收购蜗居(杭州)信息科技有限公司。",
+            "createTime":"2020-10-23T16:24:11.633"
           },
           {
-            "Id":6,
-            "Title":"星望月物联网科技有限公司在江西赣州设立服务中心",
-            "Img":"/imagestore/2018/0529/d3f75b1c-cb7e-488f-95ac-8f80f5c332fe.jpg",
-            "Type":1,
-            "Content":"      热烈祝贺星望月物联网科技有限公司在江西赣州设立服务中心",
-            "CreateTime":"2020-10-23T16:24:11.633"
+            "id":6,
+            "title":"星望月物联网科技有限公司在江西赣州设立服务中心",
+            "img":"/imagestore/2018/0529/d3f75b1c-cb7e-488f-95ac-8f80f5c332fe.jpg",
+            "type":1,
+            "content":"      热烈祝贺星望月物联网科技有限公司在江西赣州设立服务中心",
+            "createTime":"2020-10-23T16:24:11.633"
           },
           {
-            "Id":7,
-            "Title":"星望月物联网科技有限公司成立",
-            "Img":"/imagestore/2018/0917/98c71315-86dc-4c99-b973-c89136bd8885.jpg",
-            "Type":1,
-            "Content":"      热烈祝贺星望月物联网科技有限公司成立!",
-            "CreateTime":"2019-12-17T19:46:46.673"
+            "id":7,
+            "title":"星望月物联网科技有限公司成立",
+            "img":"/imagestore/2018/0917/98c71315-86dc-4c99-b973-c89136bd8885.jpg",
+            "type":1,
+            "content":"      热烈祝贺星望月物联网科技有限公司成立!",
+            "createTime":"2019-12-17T19:46:46.673"
           },
           {
-            "Id":8,
-            "Title":"星望月物联网科技有限公司全资收购蜗居(杭州)信息科技有限公司",
-            "Img":"/imagestore/2018/0529/d3f75b1c-cb7e-488f-95ac-8f80f5c332fe.jpg",
-            "Type":1,
-            "Content":"      热烈祝贺星望月物联网科技有限公司全资收购蜗居(杭州)信息科技有限公司。",
-            "CreateTime":"2020-10-23T16:24:11.633"
+            "id":8,
+            "title":"星望月物联网科技有限公司全资收购蜗居(杭州)信息科技有限公司",
+            "img":"/imagestore/2018/0529/d3f75b1c-cb7e-488f-95ac-8f80f5c332fe.jpg",
+            "type":1,
+            "content":"      热烈祝贺星望月物联网科技有限公司全资收购蜗居(杭州)信息科技有限公司。",
+            "createTime":"2020-10-23T16:24:11.633"
           },
           {
-            "Id":9,
-            "Title":"星望月物联网科技有限公司在江西赣州设立服务中心",
-            "Img":"/imagestore/2018/0529/d3f75b1c-cb7e-488f-95ac-8f80f5c332fe.jpg",
-            "Type":1,
-            "Content":"      热烈祝贺星望月物联网科技有限公司在江西赣州设立服务中心",
-            "CreateTime":"2020-10-23T16:24:11.633"
+            "id":9,
+            "title":"星望月物联网科技有限公司在江西赣州设立服务中心",
+            "img":"/imagestore/2018/0529/d3f75b1c-cb7e-488f-95ac-8f80f5c332fe.jpg",
+            "type":1,
+            "content":"      热烈祝贺星望月物联网科技有限公司在江西赣州设立服务中心",
+            "createTime":"2020-10-23T16:24:11.633"
           }
         ],
         currentPage: 4
