@@ -1,113 +1,106 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-Vue.use(Router)
+Vue.use(Router);
 
-let kejianrouter = new Router({
-  routes: [{
+let router = new Router({
+  mode: 'history',
+  routes: [
+    {
       path: '/',
       name: 'home',
-      component: () => import('./views/Home.vue')
-    },
-    {
-      path: '/news',
-      name: 'news',
-      component: () => import('./views/News.vue'),
-    },
-    {
-      path: '/newsdetails/:id',
-      name: 'newsdetails',
-      component: () => import('./views/NewsDetails.vue'),
-    },
-    {
-      path: '/product',
-      name: 'product',
-      component: () => import('./views/Product.vue'),
+      component: () => import('./pages/Home.vue')
     },
     {
       path: '/case',
       name: 'case',
-      component: () => import('./views/Case.vue')
+      component: () => import('./pages/case/Case.vue')
     },
     {
       path: '/casedetails/:id',
       name: 'casedetails',
-      component: () => import('./views/CaseDetails.vue')
+      component: () => import('./pages/case/CaseDetails.vue')
     },
     {
-      path: '/goin',
-      name: 'goin',
-      component: () => import('./views/GoIn.vue')
+      path: '/about',
+      name: 'about',
+      component: () => import('./pages/about/About.vue'),
+    },
+
+    {
+      path: '/business',
+      name: 'business',
+      component: () => import('./pages/business/Business')
     },
     {
-      path: '/download',
-      name: 'download',
-      component: () => import('./views/Download.vue')
+      path: '/solution',
+      name: 'solution',
+      component: () => import('./pages/solution/Solution.vue')
     },
     {
-      path: '/login',
-      name: 'login',
-      component: () => import('./views/Login.vue')
+      path: '/companyDynamics',
+      name: 'companyDynamics',
+      component: () => import('./pages/companyDynamics/CompanyDynamics.vue')
+    },
+    {
+      path: '/companyDynamicdetails/:id',
+      name: 'companyDynamicdetails',
+      component: () => import('./pages/companyDynamics/CompanyDynamicsDetails.vue')
+    },
+    {
+      path: '/contactUs',
+      name: 'contactUs',
+      component: () => import('./pages/contactUs/ContactUs.vue')
+    },
+    {
+      path: '/systemLogin',
+      name: 'systemLogin',
+      component: () => import('./pages/Login.vue')
     },
     {
       path: '/admin',
       name: 'admin',
       meta: {
-        requireAuth: true
+        requireAuth: false
       },
-      component: () => import('./views/Admin.vue'),
+      component: () => import('./pages/Admin.vue'),
       children: [{
-          path: '/admin/user',
-          name: 'user',
-          component: () => import('./views/Admin/User.vue')
-        },
+        path: '/admin/user',
+        name: 'user',
+        component: () => import('./pages/admin/User.vue')
+      },
         {
           path: '/admin/news',
           name: 'new',
-          component: () => import('./views/Admin/News.vue')
+          component: () => import('./pages/admin/News.vue')
         },
         {
           path: '/admin/cases',
           name: 'cases',
-          component: () => import('./views/Admin/Cases.vue')
-        },
-        {
-          path: '/admin/team',
-          name: 'team',
-          component: () => import('./views/Admin/Team.vue')
+          component: () => import('./pages/admin/Cases.vue')
         },
         {
           path: '/admin/course',
           name: 'course',
-          component: () => import('./views/Admin/Course.vue')
+          component: () => import('./pages/admin/Course.vue')
         },
         {
           path: '/admin/enterprise',
           name: 'enterprise',
-          component: () => import('./views/Admin/Enterprise.vue')
-        },
-        {
-          path: '/admin/honor',
-          name: 'honor',
-          component: () => import('./views/Admin/Honor.vue')
+          component: () => import('./pages/admin/Enterprise.vue')
         },
         {
           path: '/admin/dictionary',
           name: 'dictionary',
-          component: () => import('./views/Admin/Dictionary.vue')
+          component: () => import('./pages/admin/Dictionary.vue')
         },
-        {
-          path: '/admin/page',
-          name: 'page',
-          component: () => import('./views/Admin/Page.vue')
-        }
       ]
     }
   ]
 })
 
 // 判断是否需要登录权限 以及是否登录
-kejianrouter.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
   // 判断是否需要登录权限
   if (to.matched.some(res => res.meta.requireAuth)) {
     // 判断是否登录
@@ -127,4 +120,4 @@ kejianrouter.beforeEach((to, from, next) => {
   }
 })
 
-export default kejianrouter
+export default router
