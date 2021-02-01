@@ -1,20 +1,22 @@
 <template>
   <div class="cases">
-    <el-button type="primary" @click="openDialog()">新增数据</el-button>
+    <el-button type="primary" size="small" @click="openDialog()">新增数据</el-button>
 
     <el-table border :data="tableData" v-loading="loading" style="width: 100%">
-      <el-table-column prop="id" label="序号" width="180"></el-table-column>
-      <el-table-column prop="year" label="历程年份" width="180"></el-table-column>
-      <el-table-column prop="content" label="历程内容"></el-table-column>
-      <el-table-column label="操作">
+      <el-table-column prop="id" label="序号" width="50"  align="center"></el-table-column>
+      <el-table-column prop="year" label="历程年份" width="180"  align="center"></el-table-column>
+      <el-table-column prop="content" label="历程内容"  width="730" align="center"></el-table-column>
+      <el-table-column label="操作" width="180" align="center">
         <template slot-scope="scope">
           <el-button
             type="primary"
+            size="small"
             icon="el-icon-edit"
             @click="handleEdit(scope.$index, scope.row)"
           ></el-button>
           <el-button
             type="danger"
+            size="small"
             icon="el-icon-delete"
             @click="handleDelete(scope.$index, scope.row)"
           ></el-button>
@@ -24,15 +26,30 @@
     <el-dialog title="发展历程编辑" :visible.sync="dialogFormVisible">
       <el-form :model="formData">
         <el-form-item label="历程年份" :label-width="formLabelWidth">
-          <el-input v-model="formData.year" autocomplete="off"></el-input>
+            <el-date-picker
+                    v-model="formData.year"
+                    type="month"
+                    placeholder="选择月份"
+                    format="yyyy-MM"
+                    value-format="yyyy-MM"
+            >
+            </el-date-picker>
+<!--          <el-input v-model="formData.year" autocomplete="off"></el-input>-->
+  <!--          <el-date-picker
+                    v-model="propValue"
+                    class="timePicker"
+                    type="month"
+                    format="yyyy年MM月"
+                    value-format="yyyy年MM月"
+                    clearable></el-date-picker>-->
         </el-form-item>
         <el-form-item label="历程内容" :label-width="formLabelWidth">
           <el-input v-model="formData.content" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="handleCreateOrModify()">确 定</el-button>
+        <el-button size="small" @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" size="small" @click="handleCreateOrModify()">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -62,17 +79,19 @@ export default {
         Authorization: token
       }
     };
-
+    this.headers = {
+      Authorization: token
+    };
     this.loadData();
   },
   methods: {
     loadData() {
       this.loading = true;
       this.$http
-        .get("Course/GetCourseAll")
+        .post("course/listAll", {}, this.options)
         .then(response => {
           window.console.log(response);
-          this.tableData = response.data;
+          this.tableData = response.data.data;
           this.loading = false;
         })
         .catch(e => {
@@ -85,11 +104,8 @@ export default {
     openDialog() {
       // 清除数据
       this.formData.id = 0;
-      this.formData.LoginName = "";
-      this.formData.Password = "";
-      this.formData.IsAction = true;
-      this.formData.createTime = new Date();
-
+      this.formData.year = "";
+      this.formData.content = "";
       this.dialogFormVisible = true;
     },
     // 新增
@@ -100,7 +116,7 @@ export default {
         // ID 无效时 视为新增
         this.loading = true;
         this.$http
-          .post("Course/CreateCourse", this.formData, this.options)
+          .post("course/create", this.formData, this.options)
           .then(response => {
             this.loading = false;
             window.console.log(response);
@@ -120,7 +136,7 @@ export default {
       } else {
         this.loading = true;
         this.$http
-          .post("Course/ModifiedCourse", this.formData, this.options)
+          .post("course/update/"+this.formData.id, this.formData, this.options)
           .then(response => {
             this.loading = false;
             window.console.log(response);
@@ -156,7 +172,7 @@ export default {
           // 调接口删除
           this.loading = true;
           this.$http
-            .post(`Course/DeleteCourse?id=${row.id}`, null, this.options)
+            .post(`course/delete/`+row.id, null, this.options)
             .then(response => {
               this.loading = false;
               window.console.log(response);

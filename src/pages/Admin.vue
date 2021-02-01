@@ -19,9 +19,17 @@
             <i class="el-icon-time"></i>
             <span slot="title">历程管理</span>
           </el-menu-item>
+          <el-menu-item index="/admin/job">
+            <i class="el-icon-setting"></i>
+            <span slot="title">招聘职位</span>
+          </el-menu-item>
           <el-menu-item index="/admin/dictionary">
             <i class="el-icon-setting"></i>
             <span slot="title">字典管理</span>
+          </el-menu-item>
+          <el-menu-item index="/admin/imgdictionary">
+            <i class="el-icon-setting"></i>
+            <span slot="title">图片管理</span>
           </el-menu-item>
         </el-menu>
       </el-aside>

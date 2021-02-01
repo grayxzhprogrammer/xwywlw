@@ -10,7 +10,6 @@
                             ref="table"
                             style="width: 80%;margin:0 auto"
                             :data="tableData"
-
                             :row-key="getRowKeys"
                             :expand-row-keys="expands"
                             @expand-change="exChange">
@@ -56,7 +55,7 @@
                                     </el-row>
                                     <el-row>
                                         <el-form-item label="">
-                                            <p>请发送邮件至job@qiekj.com</p>
+                                            <p>请发送邮件至{{ props.row.email }}</p>
                                         </el-form-item>
                                     </el-row>
                                 </el-form>
@@ -74,15 +73,15 @@
                         <span class="title_sub">高度决定视野,角度改变观念,尺度把握人生。</span>
                         <span class="title_sub">产品不好我们不做！没有能力我们不做！</span>
                         <span>共创全国最大的校园共享服务平台</span>
-                     <!--   <p class="contact_title">智慧物联</p>
-                        <span class="title_sub">王经理18656357947</span>
-                        <span class="title_sub">张经理13771943619</span>
-                        <span class="title_sub">曹经理13604049809</span>
-                        <p class="contact_title">高端洗衣房加盟</p >
-                        <span> 400-668-9966</span>
-                        <p class="contact_title"> 互动营销</p>
-                        <span>手机：18868787059</span>
-                        <span>邮箱：service@xwy.com</span>-->
+                        <!--   <p class="contact_title">智慧物联</p>
+                           <span class="title_sub">王经理18656357947</span>
+                           <span class="title_sub">张经理13771943619</span>
+                           <span class="title_sub">曹经理13604049809</span>
+                           <p class="contact_title">高端洗衣房加盟</p >
+                           <span> 400-668-9966</span>
+                           <p class="contact_title"> 互动营销</p>
+                           <span>手机：18868787059</span>
+                           <span>邮箱：service@xwy.com</span>-->
                         <p class="contact_title">公司地址</p>
                         <span>浙江省杭州市临安区青山湖街道大园路1188号2幢3层</span>
                         <p class="contact_title">赣州服务中心</p>
@@ -112,48 +111,22 @@
                 loading: true,
                 expands: [],
                 getRowKeys: (row) => {
-                    return row.eqId
+                    return row.id
                 },
-                tableData: [{
-                    eqId:1,
-                    job: '测试工程师',
-                    city: '杭州',
-                    workYears: '3-5年',
-                    education:'大专以上',
-                    createDate:'2019-11-03',
-                    jobResponsibilities:'工作职责内容1',
-                    qualifications:'任职资格内容1'
-                }, {
-                    eqId:2,
-                    job: '人事行政专员',
-                    city: '杭州',
-                    workYears: '1-3年',
-                    education:'大专',
-                    createDate:'2019-11-03',
-                    jobResponsibilities:'工作职责内容2',
-                    qualifications:'任职资格内容2'
-                }, {
-                    eqId:3,
-                    job: '测试工程师',
-                    city: '杭州',
-                    workYears: '3-5年',
-                    education:'大专以上',
-                    createDate:'2019-11-03',
-                    jobResponsibilities:'工作职责内容1',
-                    qualifications:'任职资格内容1'
-                }, {
-                    eqId:4,
-                    job: '人事行政专员',
-                    city: '杭州',
-                    workYears: '1-3年',
-                    education:'大专',
-                    createDate:'2019-11-03',
-                    jobResponsibilities:'工作职责内容2',
-                    qualifications:'任职资格内容2'
-                }],
+                tableData: [],
             }
         },
         mounted() {
+            this.$http.post("portal/listJobPage?pageNum=1&pageSize=5",{},this.option).then(
+                response => {
+                    this.tableData = response.data.data.list;
+                    this.loading = true;
+                }).catch(e => {
+                this.$message({
+                    message: "网络或程序异常！" + e,
+                    type: "error"
+                });
+            });
             // 初始化地图对象，加载地图
             /*       MapLoader().then(aMap => {
                        console.log('%地图异步加载成功%')
@@ -166,12 +139,12 @@
         },
         methods: {
             exChange(row, rowList) {
-                this.loading = true
+
                 var that = this
                 if (rowList.length) {
                     that.expands = []
                     if (row) {
-                        that.expands.push(row.eqId)
+                        that.expands.push(row.id);
                     }
                 } else {
                     that.expands = []

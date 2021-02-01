@@ -1,24 +1,26 @@
 <template>
   <div class="Team">
-    <el-button type="primary" @click="openDialog()">新增数据</el-button>
+    <el-button type="primary" size="small" @click="openDialog()">新增数据</el-button>
 
     <el-table border :data="tableData" v-loading="loading" style="width: 100%">
-      <el-table-column prop="id" label="序号" width="180" align="center"></el-table-column>
+      <el-table-column prop="id" label="序号" width="50" align="center"></el-table-column>
       <el-table-column prop="img" label="图片" align="center">
         <template slot-scope="scope">
           <img style="width:100%" :src="scope.row.img" alt />
         </template>
       </el-table-column>
       <el-table-column prop="remark" label="备注" align="center"></el-table-column>
-      <el-table-column label="操作" align="center">
+      <el-table-column label="操作" width="180" align="center">
         <template slot-scope="scope">
           <el-button
             type="primary"
+            size="small"
             icon="el-icon-edit"
             @click="handleEdit(scope.$index, scope.row)"
           ></el-button>
           <el-button
             type="danger"
+            size="small"
             icon="el-icon-delete"
             @click="handleDelete(scope.$index, scope.row)"
           ></el-button>
@@ -44,8 +46,8 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="handleCreateOrModify()">确 定</el-button>
+        <el-button size="small" @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" size="small" @click="handleCreateOrModify()">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -85,7 +87,7 @@ export default {
   methods: {
     handleSuccess(response, file, fileList) {
       window.console.log(response, file, fileList);
-      this.formData.img = response;
+      this.formData.img = response.data;
     },
     loadData() {
       this.loading = true;
@@ -93,7 +95,7 @@ export default {
         .get("Team/GetTeamAll")
         .then(response => {
           window.console.log(response);
-          this.tableData = response.data;
+          this.tableData = response.data.data;
           this.loading = false;
         })
         .catch(e => {

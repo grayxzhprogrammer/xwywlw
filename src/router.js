@@ -90,9 +90,19 @@ let router = new Router({
           component: () => import('./pages/admin/Enterprise.vue')
         },
         {
+          path: '/admin/job',
+          name: 'job',
+          component: () => import('./pages/admin/Job.vue')
+        },
+        {
           path: '/admin/dictionary',
           name: 'dictionary',
           component: () => import('./pages/admin/Dictionary.vue')
+        },
+        {
+          path: '/admin/imgDictionary',
+          name: 'imgDictionary',
+          component: () => import('./pages/admin/ImgDictionary.vue')
         },
       ]
     }

@@ -61,7 +61,6 @@
               "username": this.loginform.name,
               "password": this.loginform.pass})
                     .then(res => {
-                      window.console.log(res.data);
                       if (res.data.code==200) {
                         /* this.$message({
                            message:res.data.message,

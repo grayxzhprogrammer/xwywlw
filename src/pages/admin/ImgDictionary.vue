@@ -1,15 +1,11 @@
 <template>
-  <div>
+  <div class="cases">
     <el-button type="primary" size="small" @click="openDialog()">新增用户</el-button>
-    <el-button type="danger"  size="small" >清除用户身份票据</el-button>
+
     <el-table border :data="tableData" v-loading="loading" style="width: 100%">
-      <el-table-column prop="id" label="序号" align="center"></el-table-column>
-      <el-table-column prop="username" label="用户名" align="center"></el-table-column>
-      <el-table-column prop="isAction" label="是否启用" align="center">
-        <template slot-scope="scope">{{ scope.row.isAction==1 ? '是':'否' }}</template>
-      </el-table-column>
-      <el-table-column prop="createTime" label="创建时间" align="center"></el-table-column>
-      <el-table-column prop="loginTime" label="最近登陆时间" align="center"></el-table-column>
+      <el-table-column prop="id" label="序号" width="50" align="center"></el-table-column>
+      <el-table-column prop="type" label="键" width="180" align="center"></el-table-column>
+      <el-table-column prop="name" label="值" width="180" align="center"></el-table-column>
       <el-table-column label="操作" width="180" align="center">
         <template slot-scope="scope">
           <el-button
@@ -17,29 +13,23 @@
             size="small"
             icon="el-icon-edit"
             @click="handleEdit(scope.$index, scope.row)"
-            :disabled="scope.row.LoginName == 'admin'"
           ></el-button>
           <el-button
             type="danger"
             size="small"
             icon="el-icon-delete"
             @click="handleDelete(scope.$index, scope.row)"
-            :disabled="scope.row.LoginName == 'admin'"
           ></el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-dialog title="用户信息操作" :visible.sync="dialogFormVisible">
+    <el-dialog title="案例编辑" :visible.sync="dialogFormVisible">
       <el-form :model="formData">
-        <el-form-item label="登录名" :label-width="formLabelWidth">
-          <el-input v-model="formData.username" autocomplete="off"></el-input>
+        <el-form-item label="数据键" :label-width="formLabelWidth">
+          <el-input v-model="formData.type" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="密码" :label-width="formLabelWidth">
-          <el-input v-model="formData.password" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="是否启用" :label-width="formLabelWidth">
-          <el-radio v-model="formData.isAction" :label="1" border>是</el-radio>
-          <el-radio v-model="formData.isAction" :label="0" border>否</el-radio>
+        <el-form-item label="数据键" :label-width="formLabelWidth">
+          <el-input v-model="formData.name" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -60,9 +50,8 @@ export default {
       tableData: [],
       formData: {
         id: 0,
-        username: "",
-        password: "",
-        isAction: true,
+        type: "",
+        name: "",
       },
       options: {}
     };
@@ -75,14 +64,16 @@ export default {
         Authorization: token
       }
     };
-
+    this.headers = {
+      Authorization: token
+    };
     this.loadData();
   },
   methods: {
     loadData() {
       this.loading = true;
       this.$http
-        .post("admin/listAll", {}, this.options)
+        .post(`dataDictionary/listAll`,{},this.option)
         .then(response => {
           window.console.log(response);
           this.tableData = response.data.data;
@@ -98,11 +89,8 @@ export default {
     openDialog() {
       // 清除数据
       this.formData.id = 0;
-      this.formData.LoginName = "";
-      this.formData.Password = "";
-      this.formData.IsAction = true;
-      this.formData.createTime = new Date();
-
+      this.formData.type = "";
+      this.formData.name = "";
       this.dialogFormVisible = true;
     },
     // 新增
@@ -113,7 +101,11 @@ export default {
         // ID 无效时 视为新增
         this.loading = true;
         this.$http
-          .post("User/CreateUser", this.formData, this.options)
+          .post(
+            "dataDictionary/create",
+            this.formData,
+            this.options
+          )
           .then(response => {
             this.loading = false;
             window.console.log(response);
@@ -133,7 +125,11 @@ export default {
       } else {
         this.loading = true;
         this.$http
-          .post("User/ModifiedUser", this.formData, this.options)
+          .post(
+            "dataDictionary/update/"+this.formData.id,
+            this.formData,
+            this.options
+          )
           .then(response => {
             this.loading = false;
             window.console.log(response);
@@ -169,7 +165,11 @@ export default {
           // 调接口删除
           this.loading = true;
           this.$http
-            .post(`User/DeleteUser?id=${row.id}`, null, this.options)
+            .post(
+              `dataDictionary/delete/`+row.id,
+              null,
+              this.options
+            )
             .then(response => {
               this.loading = false;
               window.console.log(response);
@@ -192,7 +192,7 @@ export default {
             message: "已取消删除"
           });
         });
-    }
+    },
   }
 };
 </script>

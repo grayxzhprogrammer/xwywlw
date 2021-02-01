@@ -1,9 +1,9 @@
 <template>
   <div class="cases">
-    <el-button type="primary" @click="openDialog()">新增案例</el-button>
+    <el-button type="primary"  size="small"  @click="openDialog()">新增案例</el-button>
 
     <el-table border :data="tableData" v-loading="loading" style="width: 100%">
-      <el-table-column prop="id" label="序号" width="180" align="center"></el-table-column>
+      <el-table-column prop="id" label="序号" width="50" align="center"></el-table-column>
       <el-table-column prop="title" label="案例标题" width="180"  align="center"></el-table-column>
       <el-table-column prop="img" label="图片"  align="center">
         <template slot-scope="scope">
@@ -12,15 +12,17 @@
       </el-table-column>
       <el-table-column prop="content" label="案例内容"  align="center"></el-table-column>
       <el-table-column prop="createTime" label="创建时间"  align="center"></el-table-column>
-      <el-table-column label="操作"  align="center">
+      <el-table-column label="操作" width="180"  align="center">
         <template slot-scope="scope">
           <el-button
             type="primary"
+            size="small"
             icon="el-icon-edit"
             @click="handleEdit(scope.$index, scope.row)"
           ></el-button>
           <el-button
             type="danger"
+            size="small"
             icon="el-icon-delete"
             @click="handleDelete(scope.$index, scope.row)"
           ></el-button>
@@ -50,8 +52,8 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="handleCreateOrModify()">确 定</el-button>
+        <el-button size="small" @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" size="small" @click="handleCreateOrModify()">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -85,7 +87,6 @@ export default {
     this.headers = {
       Authorization: token
     };
-
     this.loadData();
   },
   methods: {
