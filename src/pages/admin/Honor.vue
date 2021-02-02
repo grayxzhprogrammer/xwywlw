@@ -9,7 +9,8 @@
           <img style="width:100%" :src="scope.row.img" alt />
         </template>
       </el-table-column>
-      <el-table-column prop="remark" label="荣誉标题" width="180" align="center"></el-table-column>
+      <el-table-column prop="remark" label="荣誉标题" width="300" align="center"></el-table-column>
+      <el-table-column prop="createTime" label="创建时间" width="180" align="center"></el-table-column>
       <el-table-column label="操作" width="180" align="center">
         <template slot-scope="scope">
           <el-button
@@ -91,7 +92,7 @@ export default {
     loadData() {
       this.loading = true;
       this.$http
-        .get("Honor/GetHonorAll")
+              .post("honor/listAll", {}, this.options)
         .then(response => {
           window.console.log(response);
           this.tableData = response.data.data;
@@ -109,8 +110,6 @@ export default {
       this.formData.id = 0;
       this.formData.img = "";
       this.formData.remark = "";
-      this.formData.createTime = new Date();
-
       this.dialogFormVisible = true;
     },
     // 新增
@@ -121,7 +120,7 @@ export default {
         // ID 无效时 视为新增
         this.loading = true;
         this.$http
-          .post("Honor/CreateHonor", this.formData, this.options)
+          .post("honor/create", this.formData, this.options)
           .then(response => {
             this.loading = false;
             window.console.log(response);
@@ -141,7 +140,7 @@ export default {
       } else {
         this.loading = true;
         this.$http
-          .post("Honor/ModifiedHonor", this.formData, this.options)
+          .post("honor/update/"+this.formData.id, this.formData, this.options)
           .then(response => {
             this.loading = false;
             window.console.log(response);
@@ -177,7 +176,7 @@ export default {
           // 调接口删除
           this.loading = true;
           this.$http
-            .post(`Honor/DeleteHonor?id=${row.id}`, null, this.options)
+            .post(`honor/delete/`+row.id, null, this.options)
             .then(response => {
               this.loading = false;
               window.console.log(response);

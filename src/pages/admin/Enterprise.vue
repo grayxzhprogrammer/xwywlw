@@ -9,7 +9,8 @@
           <img style="width:200px" :src="scope.row.img" alt />
         </template>
       </el-table-column>
-      <el-table-column prop="remark" label="企业名称" width="180" align="center"></el-table-column>
+      <el-table-column prop="remark" label="企业名称" width="300" align="center"></el-table-column>
+      <el-table-column prop="createTime" label="创建时间" width="180" align="center"></el-table-column>
       <el-table-column label="操作" width="180" align="center">
         <template slot-scope="scope">
           <el-button
@@ -91,7 +92,7 @@ export default {
     loadData() {
       this.loading = true;
       this.$http
-        .get("Enterprise/GetEnterpriseAll")
+              .post("enterprise/listAll", {}, this.options)
         .then(response => {
           window.console.log(response);
           this.tableData = response.data.data;
@@ -121,7 +122,7 @@ export default {
         // ID 无效时 视为新增
         this.loading = true;
         this.$http
-          .post("Enterprise/CreateEnterprise", this.formData, this.options)
+          .post("enterprise/create", this.formData, this.options)
           .then(response => {
             this.loading = false;
             window.console.log(response);
@@ -141,7 +142,7 @@ export default {
       } else {
         this.loading = true;
         this.$http
-          .post("Enterprise/ModifiedEnterprise", this.formData, this.options)
+          .post("enterprise/update/"+this.formData.id, this.formData, this.options)
           .then(response => {
             this.loading = false;
             window.console.log(response);
@@ -177,11 +178,7 @@ export default {
           // 调接口删除
           this.loading = true;
           this.$http
-            .post(
-              `Enterprise/DeleteEnterprise?id=${row.id}`,
-              null,
-              this.options
-            )
+            .post(`enterprise/delete/`+row.id, null, this.options)
             .then(response => {
               this.loading = false;
               window.console.log(response);

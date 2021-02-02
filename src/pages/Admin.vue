@@ -7,27 +7,39 @@
             <i class="el-icon-star-off"></i>
             <span slot="title">用户管理</span>
           </el-menu-item>
+          <el-menu-item index="/admin/job">
+            <i class="el-icon-setting"></i>
+            <span slot="title">招聘职位</span>
+          </el-menu-item>
           <el-menu-item index="/admin/news">
             <i class="el-icon-news"></i>
             <span slot="title">新闻管理</span>
           </el-menu-item>
-          <el-menu-item index="/admin/cases">
-            <i class="el-icon-location-outline"></i>
-            <span slot="title">案例管理</span>
+          <el-menu-item index="/admin/message">
+            <i class="el-icon-news"></i>
+            <span slot="title">消息管理</span>
           </el-menu-item>
           <el-menu-item index="/admin/course">
             <i class="el-icon-time"></i>
             <span slot="title">历程管理</span>
           </el-menu-item>
-          <el-menu-item index="/admin/job">
-            <i class="el-icon-setting"></i>
-            <span slot="title">招聘职位</span>
+          <el-menu-item index="/admin/cases">
+            <i class="el-icon-location-outline"></i>
+            <span slot="title">案例管理</span>
+          </el-menu-item>
+          <el-menu-item index="/admin/honor">
+            <i class="el-icon-location-outline"></i>
+            <span slot="title">荣誉管理</span>
+          </el-menu-item>
+          <el-menu-item index="/admin/enterprise">
+            <i class="el-icon-location-outline"></i>
+            <span slot="title">合作企业</span>
           </el-menu-item>
           <el-menu-item index="/admin/dictionary">
             <i class="el-icon-setting"></i>
             <span slot="title">字典管理</span>
           </el-menu-item>
-          <el-menu-item index="/admin/imgdictionary">
+          <el-menu-item index="/admin/imgDictionary">
             <i class="el-icon-setting"></i>
             <span slot="title">图片管理</span>
           </el-menu-item>

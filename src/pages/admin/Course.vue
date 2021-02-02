@@ -5,7 +5,8 @@
     <el-table border :data="tableData" v-loading="loading" style="width: 100%">
       <el-table-column prop="id" label="序号" width="50"  align="center"></el-table-column>
       <el-table-column prop="year" label="历程年份" width="180"  align="center"></el-table-column>
-      <el-table-column prop="content" label="历程内容"  width="730" align="center"></el-table-column>
+      <el-table-column prop="content" label="历程内容"  width="630" align="center"></el-table-column>
+      <el-table-column prop="createTime" label="创建时间" width="180" align="center"></el-table-column>
       <el-table-column label="操作" width="180" align="center">
         <template slot-scope="scope">
           <el-button

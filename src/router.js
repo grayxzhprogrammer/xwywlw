@@ -75,6 +75,16 @@ let router = new Router({
           component: () => import('./pages/admin/News.vue')
         },
         {
+          path: '/admin/job',
+          name: 'job',
+          component: () => import('./pages/admin/Job.vue')
+        },
+        {
+          path: '/admin/message',
+          name: 'message',
+          component: () => import('./pages/admin/Message.vue')
+        },
+        {
           path: '/admin/cases',
           name: 'cases',
           component: () => import('./pages/admin/Cases.vue')
@@ -85,15 +95,16 @@ let router = new Router({
           component: () => import('./pages/admin/Course.vue')
         },
         {
+          path: '/admin/honor',
+          name: 'honor',
+          component: () => import('./pages/admin/Honor.vue')
+        },
+        {
           path: '/admin/enterprise',
           name: 'enterprise',
           component: () => import('./pages/admin/Enterprise.vue')
         },
-        {
-          path: '/admin/job',
-          name: 'job',
-          component: () => import('./pages/admin/Job.vue')
-        },
+
         {
           path: '/admin/dictionary',
           name: 'dictionary',
