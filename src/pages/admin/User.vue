@@ -1,7 +1,6 @@
 <template>
   <div>
     <el-button type="primary" size="small" @click="openDialog()">新增用户</el-button>
-    <el-button type="danger"  size="small" >清除用户身份票据</el-button>
     <el-table border :data="tableData" v-loading="loading" style="width: 100%">
       <el-table-column prop="id" label="序号" align="center"></el-table-column>
       <el-table-column prop="username" label="用户名" align="center"></el-table-column>
