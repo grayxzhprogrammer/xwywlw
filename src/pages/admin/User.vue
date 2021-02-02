@@ -32,10 +32,10 @@
     <el-dialog title="用户信息操作" :visible.sync="dialogFormVisible">
       <el-form :model="formData">
         <el-form-item label="登录名" :label-width="formLabelWidth">
-          <el-input v-model="formData.username" autocomplete="off"></el-input>
+          <el-input size="small" v-model="formData.username" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="密码" :label-width="formLabelWidth">
-          <el-input v-model="formData.password" autocomplete="off"></el-input>
+          <el-input size="small" v-model="formData.password" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="是否启用" :label-width="formLabelWidth">
           <el-radio v-model="formData.isAction" :label="1" border>是</el-radio>

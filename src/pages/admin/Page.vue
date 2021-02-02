@@ -2,10 +2,10 @@
   <div v-loading="loading">
     <el-form :inline="true" :model="formInline" class="demo-form-inline">
       <el-form-item label="姓名：">
-        <el-input v-model="formInline.name" placeholder="姓名"></el-input>
+        <el-input size="small" v-model="formInline.name" placeholder="姓名"></el-input>
       </el-form-item>
       <el-form-item label="年龄：">
-        <el-input v-model="formInline.age" label="年龄"></el-input>
+        <el-input size="small" v-model="formInline.age" label="年龄"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSelect" :loading="loading">查询</el-button>
@@ -56,7 +56,8 @@ export default {
         .then(response => {
           window.console.log(response);
           this.tableData = response.data.data;
-          this.totalCount = response.data.totalCount;
+          console.info(response.data.data.totalCount);
+          this.totalCount = response.data.data.totalCount;
           this.loading = false;
         })
         .catch(e => {

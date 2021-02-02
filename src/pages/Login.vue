@@ -13,10 +13,10 @@
                 label-width="80px"
         >
           <el-form-item label="用户名" prop="name">
-            <el-input name="name" v-model="loginform.name"></el-input>
+            <el-input size="small" name="name" v-model="loginform.name"></el-input>
           </el-form-item>
           <el-form-item label="密码" prop="pass">
-            <el-input name="password" type="password" v-model="loginform.pass" autocomplete="off"></el-input>
+            <el-input size="small" name="password" type="password" v-model="loginform.pass" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="login">登录</el-button>

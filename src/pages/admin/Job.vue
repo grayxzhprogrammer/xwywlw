@@ -29,13 +29,13 @@
     <el-dialog title="职位编辑" :visible.sync="dialogFormVisible">
       <el-form :model="formData" ref="form">
         <el-form-item label="职位名称" prop="job" :label-width="formLabelWidth">
-          <el-input v-model="formData.job" autocomplete="off"></el-input>
+          <el-input size="small" v-model="formData.job" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="城市" prop="city" :label-width="formLabelWidth">
-          <el-input v-model="formData.city" autocomplete="off"></el-input>
+          <el-input size="small" v-model="formData.city" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="工作年限" prop="workYears" :label-width="formLabelWidth">
-          <el-select v-model="formData.workYears" placeholder="请选择" >
+          <el-select size="small" v-model="formData.workYears" placeholder="请选择" >
             <el-option
                     v-for="item in workYearItems"
                     :key="item.id"
@@ -43,7 +43,7 @@
                     :value="item.name"/>
           </el-select>
         </el-form-item>
-        <el-form-item label="学历" prop="education"  :label-width="formLabelWidth">
+        <el-form-item size="small" label="学历" prop="education"  :label-width="formLabelWidth">
           <el-select v-model="formData.education" placeholder="请选择" >
             <el-option
                     v-for="item in educationItems"
@@ -53,17 +53,17 @@
           </el-select>
         </el-form-item>
         <el-form-item label="工作职责" prop="responsibilities"  :label-width="formLabelWidth">
-          <el-input type="textarea" v-model="formData.responsibilities" :autosize="{minRows:2,maxRows:4}" autocomplete="off" clearable/>
+          <el-input size="small" type="textarea" v-model="formData.responsibilities" :autosize="{minRows:2,maxRows:4}" autocomplete="off" clearable/>
 
           </el-input>
         </el-form-item>
         <el-form-item label="任职资格" prop="qualifications" :label-width="formLabelWidth">
-          <el-input  type="textarea" v-model="formData.qualifications"  :autosize="{minRows:2,maxRows:4}" autocomplete="off" clearable/>
+          <el-input size="small"  type="textarea" v-model="formData.qualifications"  :autosize="{minRows:2,maxRows:4}" autocomplete="off" clearable/>
         </el-form-item>
         <el-form-item label="邮箱地址"  prop="email"  :label-width="formLabelWidth"
                       :rules="[{ required: true, message: '请输入邮箱地址', trigger: 'blur' },{ type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }]"
         >
-          <el-input  v-model="formData.email" autocomplete="off" clearable/>
+          <el-input size="small"  v-model="formData.email" autocomplete="off" clearable/>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">

@@ -24,16 +24,27 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination
+            background
+            layout="total,sizes,prev, pager, next"
+            :page-sizes="[5, 10, 15, 20]"
+            :total="totalCount"
+            :sizes="totalPage"
+            :current-page="pageIndex"
+            :page-size="pageSize"
+            @current-change="currentChange"
+            @size-change="sizeChange"
+    ></el-pagination>
     <el-dialog title="案例编辑" :visible.sync="dialogFormVisible">
       <el-form :model="formData">
         <el-form-item label="数据类型" :label-width="formLabelWidth">
-          <el-input v-model="formData.type" autocomplete="off"></el-input>
+          <el-input size="small" v-model="formData.type" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="数据键" :label-width="formLabelWidth">
-          <el-input v-model="formData.typeKey" autocomplete="off"></el-input>
+          <el-input size="small" v-model="formData.typeKey" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="数据值" :label-width="formLabelWidth">
-          <el-input v-model="formData.name" autocomplete="off"></el-input>
+          <el-input size="small" v-model="formData.name" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -51,7 +62,11 @@
         loading: true,
         dialogFormVisible: false,
         formLabelWidth: "120px",
+        pageIndex: 1,
+        pageSize: 5,
         tableData: [],
+        totalCount: 0,
+        totalPage:0,
         formData: {
           id: 0,
           type: "",
@@ -78,10 +93,12 @@
       loadData() {
         this.loading = true;
         this.$http
-                .post("dataDictionary/listAll", {}, this.options)
+                .post("dataDictionary/pageDataDictionary", { pageNum:this.pageIndex, pageSize:this.pageSize}, this.options)
                 .then(response => {
-                  window.console.log(response);
-                  this.tableData = response.data.data;
+                 // window.console.log(response);
+                  this.tableData = response.data.data.list;
+                  this.totalCount = response.data.data.total;
+                  this.totalPage = response.data.data.totalPage;
                   this.loading = false;
                 })
                 .catch(e => {
@@ -90,6 +107,16 @@
                     type: "error"
                   });
                 });
+      },
+      currentChange(val) {
+        window.console.log(`当前页: ${val}`);
+        this.pageIndex = val;
+        this.loadData();
+      },
+      sizeChange(val) {
+        window.console.log(`每页 ${val} 条`);
+        this.pageSize = val;
+        this.loadData();
       },
       openDialog() {
         // 清除数据

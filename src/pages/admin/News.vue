@@ -1,21 +1,29 @@
 <template>
   <div class="news">
+    <el-form :inline="true" :model="formInline" class="demo-form-inline">
+      <el-form-item label="姓名：">
+        <el-input  size="small" v-model="formInline.keyword" placeholder="姓名"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary"  size="small" @click="onSelect" :loading="loading">查询</el-button>
+      </el-form-item>
+    </el-form>
     <el-button type="primary" size="small" @click="openDialog()">新增</el-button>
-
     <el-table :data="tableData" border style="width: 100%" v-loading="loading">
       <el-table-column prop="id" label="序号" width="50"  align="center"></el-table-column>
-      <el-table-column prop="title" label="新闻标题" width="180" align="center"></el-table-column>
-      <el-table-column prop="img" label="图片" align="center">
+      <el-table-column prop="title" label="新闻标题" width="300" align="center"></el-table-column>
+<!--      <el-table-column prop="img" label="图片" align="center">
         <template slot-scope="scope">
           <img style="width:100%" :src="scope.row.img" alt />
         </template>
-      </el-table-column>
+      </el-table-column>-->
       <el-table-column prop="content" label="新闻内容"  align="center">
         <template slot-scope="scope">
           <p v-if="scope.row.content.length > 100">{{scope.row.content.substring(0,100)}} ...</p>
           <p v-else>{{scope.row.content}}</p>
         </template>
       </el-table-column>
+      <el-table-column prop="createTime" label="创建时间" width="180" align="center"></el-table-column>
       <!-- <el-table-column prop="type" label="新闻类别"  align="center">
          <template slot-scope="scope">{{scope.row.type == 1 ? '公司新闻':'行业动态'}}</template>
       </el-table-column>-->
@@ -36,11 +44,22 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination
+            background
+            layout="total,sizes,prev, pager, next"
+            :page-sizes="[5, 10, 15, 20]"
+            :total="totalCount"
+            :sizes="totalPage"
+            :current-page="pageIndex"
+            :page-size="pageSize"
+            @current-change="currentChange"
+            @size-change="sizeChange"
+    ></el-pagination>
     <!--  -->
     <el-dialog title="新闻编辑" :visible.sync="dialogFormVisible">
       <el-form :model="formData">
         <el-form-item label="新闻名称" :label-width="formLabelWidth">
-          <el-input v-model="formData.title" autocomplete="off"></el-input>
+          <el-input size="small" v-model="formData.title" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="新闻图片" :label-width="formLabelWidth">
           <el-upload
@@ -55,7 +74,7 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="新闻内容" :label-width="formLabelWidth">
-          <el-input type="textarea" :rows="10" v-model="formData.content" autocomplete="off"></el-input>
+          <el-input size="small" type="textarea" :rows="10" v-model="formData.content" autocomplete="off"></el-input>
         </el-form-item>
         <!--<el-form-item label="新闻类别" :label-width="formLabelWidth">
           <el-radio v-model="formData.type" :label="1">公司新闻</el-radio>
@@ -77,7 +96,14 @@
       return {
         options: {},
         headers: {},
+        pageIndex: 1,
+        pageSize: 5,
+        formInline: {
+          keyword: "",
+        },
         tableData: [],
+        totalCount: 0,
+        totalPage:0,
         formData: {
           id: 0,
           title: "",
@@ -101,21 +127,22 @@
       this.headers = {
         Authorization: token
       };
-
-      this.loadData();
+      this.onSelect();
     },
     methods: {
       handleSuccess(response, file, fileList) {
         window.console.log(response, file, fileList);
         this.formData.img = response.data;
       },
-      loadData() {
+      onSelect() {
         this.loading = true;
         this.$http
-                .post("news/listAll", {}, this.options)
+                .post("news/pageNews", {keyword:this.formInline.keyword, pageNum:this.pageIndex, pageSize:this.pageSize}, this.options)
                 .then(response => {
                   // window.console.log(response);
-                  this.tableData = response.data.data;
+                  this.tableData = response.data.data.list;
+                  this.totalCount = response.data.data.total;
+                  this.totalPage = response.data.data.totalPage;
                   this.loading = false;
                 })
                 .catch(e => {
@@ -124,6 +151,16 @@
                     type: "error"
                   });
                 });
+      },
+      currentChange(val) {
+        window.console.log(`当前页: ${val}`);
+        this.pageIndex = val;
+        this.onSelect();
+      },
+      sizeChange(val) {
+        window.console.log(`每页 ${val} 条`);
+        this.pageSize = val;
+        this.onSelect();
       },
       openDialog() {
         // 清除数据
@@ -147,7 +184,7 @@
                       type: "success"
                     });
                     this.dialogFormVisible = false;
-                    this.loadData();
+                    this.onSelect();
                   })
                   .catch(e => {
                     this.$message({
@@ -167,7 +204,7 @@
                       type: "success"
                     });
                     this.dialogFormVisible = false;
-                    this.loadData();
+                    this.onSelect();
                   })
                   .catch(e => {
                     this.$message({
@@ -203,7 +240,7 @@
                               message: "删除成功！",
                               type: "success"
                             });
-                            this.loadData();
+                            this.onSelect();
                           })
                           .catch(e => {
                             this.$message({

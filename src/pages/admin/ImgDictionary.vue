@@ -37,31 +37,31 @@
     <el-dialog title="案例编辑" :visible.sync="dialogFormVisible">
       <el-form :model="formData">
         <el-form-item label="数据类型" :label-width="formLabelWidth">
-          <el-input v-model="formData.type" autocomplete="off"></el-input>
+          <el-input size="small" v-model="formData.type" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="数据键" :label-width="formLabelWidth">
-          <el-input v-model="formData.typeKey" autocomplete="off"></el-input>
+          <el-input size="small" v-model="formData.typeKey" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="图片" :label-width="formLabelWidth">
-          <el-input v-model="formData.img" autocomplete="off"></el-input>
+          <el-input size="small" v-model="formData.img" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="标题" :label-width="formLabelWidth">
-          <el-input v-model="formData.title" autocomplete="off"></el-input>
+          <el-input size="small" v-model="formData.title" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="内容1" :label-width="formLabelWidth">
-          <el-input v-model="formData.content1" autocomplete="off"></el-input>
+          <el-input size="small" v-model="formData.content1" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="内容2" :label-width="formLabelWidth">
-          <el-input v-model="formData.content2" autocomplete="off"></el-input>
+          <el-input size="small" v-model="formData.content2" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="内容3" :label-width="formLabelWidth">
-          <el-input v-model="formData.content3" autocomplete="off"></el-input>
+          <el-input size="small" v-model="formData.content3" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="内容4" :label-width="formLabelWidth">
-          <el-input v-model="formData.content4" autocomplete="off"></el-input>
+          <el-input size="small" v-model="formData.content4" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="排序" :label-width="formLabelWidth">
-          <el-input type="number" v-model="formData.sort" autocomplete="off"></el-input>
+          <el-input size="small" type="number" v-model="formData.sort" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">

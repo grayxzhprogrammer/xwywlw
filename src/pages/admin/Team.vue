@@ -42,7 +42,7 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="备注" :label-width="formLabelWidth">
-          <el-input v-model="formData.remark" autocomplete="off"></el-input>
+          <el-input size="small" v-model="formData.remark" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">

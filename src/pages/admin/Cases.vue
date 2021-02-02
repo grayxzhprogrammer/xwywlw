@@ -32,7 +32,7 @@
     <el-dialog title="案例编辑" :visible.sync="dialogFormVisible">
       <el-form :model="formData">
         <el-form-item label="案例标题" :label-width="formLabelWidth">
-          <el-input v-model="formData.title" autocomplete="off"></el-input>
+          <el-input size="small" v-model="formData.title" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="案例图片" :label-width="formLabelWidth">
           <!-- :before-upload="beforeAvatarUpload" -->
@@ -48,7 +48,7 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="案例内容" :label-width="formLabelWidth">
-          <el-input v-model="formData.content" autocomplete="off"></el-input>
+          <el-input size="small" v-model="formData.content" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">

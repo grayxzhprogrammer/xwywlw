@@ -19,6 +19,17 @@
                 </template>
             </el-table-column>
         </el-table>
+        <el-pagination
+                background
+                layout="total,sizes,prev, pager, next"
+                :page-sizes="[5, 10, 15, 20]"
+                :total="totalCount"
+                :sizes="totalPage"
+                :current-page="pageIndex"
+                :page-size="pageSize"
+                @current-change="currentChange"
+                @size-change="sizeChange"
+        ></el-pagination>
     </div>
 </template>
 
@@ -29,7 +40,13 @@
                 loading: true,
                 dialogFormVisible: false,
                 formLabelWidth: "120px",
+                pageIndex: 1,
+                pageSize: 5,
                 tableData: [],
+                totalCount: 0,
+                totalPage:0,
+                options: {},
+                headers: {},
             };
         },
         mounted() {
@@ -49,10 +66,12 @@
             loadData() {
                 this.loading = true;
                 this.$http
-                    .post("message/listAll", {}, this.options)
+                    .post("message/pageMessage", {pageNum:this.pageIndex, pageSize:this.pageSize}, this.options)
                     .then(response => {
                         window.console.log(response);
-                        this.tableData = response.data.data;
+                        this.tableData = response.data.data.list;
+                        this.totalCount = response.data.data.total;
+                        this.totalPage = response.data.data.totalPage;
                         this.loading = false;
                     })
                     .catch(e => {
@@ -61,6 +80,16 @@
                             type: "error"
                         });
                     });
+            },
+            currentChange(val) {
+                window.console.log(`当前页: ${val}`);
+                this.pageIndex = val;
+                this.loadData();
+            },
+            sizeChange(val) {
+                window.console.log(`每页 ${val} 条`);
+                this.pageSize = val;
+                this.loadData();
             },
             handleDelete(index, row) {
                 window.console.log(index, row);
